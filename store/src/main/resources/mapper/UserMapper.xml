@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="org.liangjunjie.store.mappers.UserMapper">
+	<!-- 插入用户数据 -->
+		<!-- Integer insert(User user) -->
+		<insert id="insert" 
+			useGeneratedKeys="true" 
+			keyProperty="uid">
+			INSERT INTO t_user (
+				username, password,
+				salt, avatar,
+				phone, email,
+				gender, is_delete,
+				created_user, created_time,
+				modified_user, modified_time
+			) VALUES (
+				#{username}, #{password},
+				#{salt}, #{avatar},
+				#{phone}, #{email},
+				#{gender}, #{isDelete},
+				#{createdUser}, #{createdTime},
+				#{modifiedUser}, #{modifiedTime}
+			)
+		</insert>
+	
+	<!-- User findByUsername(String username) -->
+	<select id="findByUsername"
+		resultType="org.liangjunjie.store.entity.User">
+		SELECT 
+			uid
+		FROM 
+			t_user
+		WHERE 
+			username=#{username}
+	</select>
+</mapper>
